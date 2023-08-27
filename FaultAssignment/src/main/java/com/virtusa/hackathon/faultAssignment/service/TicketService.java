@@ -6,6 +6,8 @@ import com.virtusa.hackathon.faultAssignment.entity.Ticket;
 
 public interface TicketService {
 	Ticket findTicketById(Long ticketId);
-	List<Ticket> getAllOpenTickets(String status);
+	List<Ticket> getTicketsByStatus(String status);
 	Ticket updateTicket(Ticket ticket);
+	List<Ticket> ticketsOfAgent(long agentId);
+	List<Ticket> allOpenTicketsOfAgent(long agentId);
 }

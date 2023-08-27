@@ -2,6 +2,9 @@ package com.virtusa.hackathon.faultAssignment.entity;
 
 import java.util.List;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,7 +34,9 @@ public class Agent {
     private int workload;
     private List<String> languages;
     private String shiftInformation;
-	private int rating;
+    @DecimalMin(value = "0.0", inclusive = false)
+    @Digits(integer = 1, fraction = 1)
+	private float rating;
 	 @OneToMany(mappedBy = "agent", fetch = FetchType.LAZY)
 	 @ElementCollection
 	private List<Ticket> tickets;

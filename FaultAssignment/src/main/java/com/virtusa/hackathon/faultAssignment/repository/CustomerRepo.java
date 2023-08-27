@@ -7,5 +7,4 @@ import com.virtusa.hackathon.faultAssignment.entity.Customer;
 
 
 public interface CustomerRepo extends JpaRepository<Customer, Long>{
-
 }

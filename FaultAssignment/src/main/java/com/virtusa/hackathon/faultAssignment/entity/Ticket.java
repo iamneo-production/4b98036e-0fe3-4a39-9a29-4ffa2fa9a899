@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -35,9 +36,10 @@ public class Ticket {
     private List<String> tags;
     private boolean acknowledgement;
     private Time estimatedResolutionTime;
+    @Column(length = 1000000)
     private List<String> communicationLogs;
     private String reportedChannel;
-   
+    private int rating;
     @ManyToOne(fetch = FetchType.EAGER,optional=false)
     @JoinColumn(name = "customerId")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
