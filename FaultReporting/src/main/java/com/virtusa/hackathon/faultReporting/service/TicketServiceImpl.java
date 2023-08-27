@@ -1,5 +1,7 @@
 package com.virtusa.hackathon.faultReporting.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +56,10 @@ public class TicketServiceImpl implements TicketService {
 		
 			ticketRepo.save(ticket);
 		}
+	}
+
+	@Override
+	public List<Ticket> getClosedTicketsOfCust(long custId) {
+		return ticketRepo.findClosedTicketsByCustomer(custId);
 	}
 }
