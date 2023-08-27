@@ -1,21 +1,22 @@
-package com.example.agent.entity;
+package com.virtusa.hackathon.agent.dto;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Data
 @NoArgsConstructor
-@Entity
-public class Agent {
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AgentDto {
+	
 	private Long agentId;
     private String name;
     private String type;
@@ -27,30 +28,31 @@ public class Agent {
     private int workload;
     private List<String> languages;
     private String shiftInformation;
-	private int rating;
-	public Agent(Long agentId, String name, String type, String location,
-			String contactInformation, String password, List<String> skills, List<String> languages,
-			String shiftInformation, int rating) {
+    @DecimalMin(value = "0.0", inclusive = false)
+    @Digits(integer = 1, fraction = 1)
+	private float rating;
+	 @OneToMany(mappedBy = "agent", fetch = FetchType.LAZY)
+	 @ElementCollection
+	private List<Ticketdto> tickets;
+	public AgentDto(Long agentId, String name, String type, String location,
+			String contactInformation, String password, List<String> skills,  List<String> languages,
+			String shiftInformation, int rating, List<Ticketdto> tickets) {
 		super();
 		this.agentId = agentId;
 		this.name = name;
 		this.type = type;
+		this.availability = availability;
 		this.location = location;
 		this.contactInformation = contactInformation;
 		this.password = password;
 		this.skills = skills;
 		this.workload = 0;
-		if(this.workload>5) {
-			this.availability=false;
-		}
-		else {
-			this.availability=true;
-		}
+		this.availability=true;
 		this.languages = languages;
 		this.shiftInformation = shiftInformation;
 		this.rating = rating;
+		this.tickets = tickets;
 	}
-	
 	
 	
 }

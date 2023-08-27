@@ -1,12 +1,14 @@
-package com.example.agent.service;
+package com.virtusa.hackathon.agent.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.agent.entity.Agent;
-import com.example.agent.repository.AgentRepo;
+import com.virtusa.hackathon.agent.dto.AgentDto;
+import com.virtusa.hackathon.agent.dto.Ticketdto;
+import com.virtusa.hackathon.agent.entity.Agent;
+import com.virtusa.hackathon.agent.repository.AgentRepo;
 
 
 @Service
@@ -37,6 +39,31 @@ public class AgentServiceImpl implements AgentService {
 	public List<Agent> getAvailabileAgents() {
 		return agentRepo.findByAvailabilityIsTrue();
 	}
+
+	@Override
+	public List<Agent> getAgentsOrderRating() {
+		
+		return agentRepo.findAvailableAgentsOrderedByRating();
+	}
+
+	@Override
+	public void updateAvailability(Agent a) {
+		if(a.getWorkload()>5) {
+			a.setAvailability(false);
+		}
+		a.setAvailability(true);
+		
+	}
+	@Override
+	public void updateAgentRating(int n, float rating,Agent agent) {
+		agent.setRating(((agent.getRating()*(n-1))+rating)/n);
+		agentRepo.save(agent);
+		
+	}
+
+	
+
+	
 
 	
 }
