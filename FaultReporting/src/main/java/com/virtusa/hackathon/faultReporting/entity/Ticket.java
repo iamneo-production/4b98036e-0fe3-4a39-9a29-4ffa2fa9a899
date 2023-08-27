@@ -37,6 +37,7 @@ public class Ticket {
     private Time estimatedResolutionTime;
     private List<String> communicationLogs;
     private String reportedChannel;
+    private int rating;
    
     @ManyToOne(fetch = FetchType.EAGER,optional=false)
     @JoinColumn(name = "customerId")

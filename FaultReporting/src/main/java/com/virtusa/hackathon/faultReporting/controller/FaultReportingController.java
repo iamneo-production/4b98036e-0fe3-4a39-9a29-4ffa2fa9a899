@@ -94,6 +94,32 @@ public class FaultReportingController {
 	        return c.getTickets();
 	   
 	}
+	@GetMapping("/getClosedTicketsOfCust/{customerId}")
+	public ResponseEntity<?> getClosedTicketsOfCust(@PathVariable("customerId") long customerid){
+		try{
+	        return new ResponseEntity<List<Ticket>>(ticketService.getClosedTicketsOfCust(customerid), HttpStatus.OK);
+	    }
+	    catch (Exception e){
+	        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	   
+	}
+	@PutMapping("/addCustomerFeedBack/{ticketId}/{feedback}")
+public ResponseEntity<?> addCustomerFeedBack(@PathVariable("ticketId") long ticketId,@PathVariable("feedback") int feedback){
+		
+		try{
+			Ticket t=ticketService.findTicketById(ticketId);
+			if(t!=null) {
+				//t.setRating(feedback);
+				ticketService.updateTicketStatus(t, "Rated");
+				return new ResponseEntity<Ticket>(t, HttpStatus.CREATED);}
+			else
+				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+	    }
+	    catch (Exception e){
+	        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	}
 	
 	
 }
