@@ -19,7 +19,7 @@ public class Customer {
     private String customerName;
     private String customerEmail;
     private String customerPassword;
-    private Integer customerContactNumber;
+    private String customerContactNumber;
     private String customerLocation;
     private String customerLevel;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
