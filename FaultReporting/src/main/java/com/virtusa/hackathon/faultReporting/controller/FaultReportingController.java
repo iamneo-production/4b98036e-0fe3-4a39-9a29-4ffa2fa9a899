@@ -110,7 +110,7 @@ public ResponseEntity<?> addCustomerFeedBack(@PathVariable("ticketId") long tick
 		try{
 			Ticket t=ticketService.findTicketById(ticketId);
 			if(t!=null) {
-				t.setRating(feedback);
+				//t.setRating(feedback);
 				ticketService.updateTicketStatus(t, "Rated");
 				return new ResponseEntity<Ticket>(t, HttpStatus.CREATED);}
 			else

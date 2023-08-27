@@ -28,7 +28,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class="text-center">Report New Fault</h1>
             <div class="card-body">
-                <form th:action="@{/fault-reports}" th:object="${faultReport}" method="POST">
+                <form th:action="@{/createTicket}" th:object="${faultReport}" method="POST">
                     <div class="form-group">
                         <label>Fault Description</label>
                         <input type="text"
