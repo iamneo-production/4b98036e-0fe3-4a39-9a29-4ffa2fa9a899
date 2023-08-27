@@ -1,5 +1,7 @@
 package com.fault_reporting.fault_reporting_service.service.impl;
 
+import java.util.Random;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,9 +23,15 @@ public class FaultReportingServiceImpl implements FaultReportingService {
 
     @Override
     public ResponseEntity<?> reportFault(Fault fault) {
+        Integer priority = getPriority(fault.getSeverity());
+        fault.setPriority(priority);
        try {
             Fault reportedFault =  faultReportingRepository.save(fault);
-            return ResponseEntity.ok(ResponseUtil.createSuccessReponse(reportedFault));
+            if(reportedFault !=null) {
+                Random rnd = new Random();
+                faultId = "FAULT" + rnd.nextInt(99999999);
+            }
+            return ResponseEntity.ok(ResponseUtil.createSuccessReponse(FaultResponse.builder.faultId(faultId).build()));
         
        } catch (Exception e) {
             log.error("Unable to save the fault {}", fault);

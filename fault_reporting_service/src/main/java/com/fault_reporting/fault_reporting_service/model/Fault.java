@@ -1,5 +1,7 @@
 package com.fault_reporting.fault_reporting_service.model;
 
+import java.time.LocalDateTime;
+
 import com.fault_reporting.fault_reporting_service.model.enums.PriorityType;
 
 import jakarta.persistence.Entity;
@@ -19,7 +21,13 @@ public class Fault {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer faultId;
     private String issue;
+    private String category;
     private String description;
-    private PriorityType priority;
+    private Integer priority;
     private String severity;
+    private Integer customerId;
+    private String status;
+
+    @CreationTimestamp
+    private LocalDateTime reportedDateTime;
 }
