@@ -59,7 +59,16 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public List<Ticket> getClosedTicketsOfCust(long custId) {
-		return ticketRepo.findClosedTicketsByCustomer(custId);
+	public List<Ticket> getTicketsOfCustByStatus(long custId,String status) {
+		return ticketRepo.findTicketsByCustomerByStatus(custId,status);
+	}
+
+	public void updateTicket(Ticket tl) {
+		Ticket t=ticketRepo.findByTicketId(tl.getTicketId());
+		System.out.println(tl.getStatus());
+		t.setStatus(tl.getStatus());
+		t.setCommunicationLogs(tl.getCommunicationLogs());
+		ticketRepo.save(t);
+		
 	}
 }

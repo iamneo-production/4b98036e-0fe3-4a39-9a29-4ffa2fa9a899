@@ -1,13 +1,13 @@
-package com.virtusa.hackathon.faultAssignment.entity;
+package com.virtusa.hackathon.agent.dto;
 
 import java.sql.Time;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.virtusa.hackathon.agent.entity.Agent;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -22,10 +22,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Ticket {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Ticketdto {
 	private long ticketId;
     private String location;
     private LocalDateTime dateTime;
@@ -43,7 +40,7 @@ public class Ticket {
     @ManyToOne(fetch = FetchType.EAGER,optional=false)
     @JoinColumn(name = "customerId")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Customer customer;
+    private Customerdto customer;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "agentId")

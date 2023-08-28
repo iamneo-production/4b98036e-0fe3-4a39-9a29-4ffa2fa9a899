@@ -6,7 +6,7 @@ spring:
     name: FAULT-REPORTING-SERVICE
   datasource:
     username: root
-    password: root@2023
+    password: Raj
     url: jdbc:mysql://localhost:3306/stage3?useSSL=false&createDatabaseIfNotExist=true
   jpa:
     hibernate:

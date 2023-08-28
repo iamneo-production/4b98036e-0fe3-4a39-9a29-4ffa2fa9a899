@@ -10,7 +10,7 @@ import com.virtusa.hackathon.faultReporting.entity.Ticket;
 
 public interface TicketRepo extends JpaRepository<Ticket, Long> {
 	Ticket findByTicketId(Long ticketId);
-	@Query("SELECT t FROM Ticket t WHERE t.customer.customerId = :customerId AND t.status = 'Closed'")
-    List<Ticket> findClosedTicketsByCustomer(@Param("customerId") Long customerId);
+	@Query("SELECT t FROM Ticket t WHERE t.customer.customerId = :customerId AND t.status = :status")
+    List<Ticket> findTicketsByCustomerByStatus(@Param("customerId") Long customerId,@Param("status") String status);
 
 }

@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.virtusa.hackathon.faultAssignment.entity.Agent;
 import com.virtusa.hackathon.faultAssignment.entity.Ticket;
+import com.virtusa.hackathon.faultAssignment.repository.AgentRepo;
 import com.virtusa.hackathon.faultAssignment.repository.TicketRepo;
 
 
@@ -17,7 +19,8 @@ public class TicketServiceImpl implements TicketService {
 
 	@Autowired
 	private TicketRepo ticketRepo;
-	
+	@Autowired
+	private AgentRepo agentRepo;
 	
 	@Override
 	public Ticket findTicketById(Long TicketId) {
@@ -26,7 +29,7 @@ public class TicketServiceImpl implements TicketService {
 
 
 	@Override
-	public List<Ticket> getAllOpenTickets(String status) {
+	public List<Ticket> getTicketsByStatus(String status) {
 		
 		return ticketRepo.findByStatus(status);
 	}
@@ -38,7 +41,25 @@ public class TicketServiceImpl implements TicketService {
 		return ticketRepo.save(ticket);
 	}
 
-	
+
+	@Override
+	public List<Ticket> ticketsOfAgent(long agentId) {
+		Agent a=agentRepo.findByAgentId(agentId);
+		if(a!=null)
+			return a.getTickets();
+		else
+			return null;
+	}
+
+	@Override
+	public List<Ticket> allOpenTicketsOfAgent(long agentId) {
+		Agent agent=agentRepo.findByAgentId(agentId);
+		if(agent!=null) {
+			return agentRepo.findOpenTicketsForAgent(agentId);
+		}
+		return null;
+		
+	}
 
 	
 }

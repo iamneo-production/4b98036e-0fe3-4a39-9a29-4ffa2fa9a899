@@ -1,20 +1,24 @@
-package com.virtusa.hackathon.faultReporting.entity;
+package com.virtusa.hackathon.agent.dto;
 
-import jakarta.persistence.*;
+import java.util.List;
+
+
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer {
+public class Customerdto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
     private String customerName;
     private String customerEmail;
@@ -24,5 +28,5 @@ public class Customer {
     private String customerLevel;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     @ElementCollection
-    private List<Ticket> tickets;
+    private List<Ticketdto> tickets;
 }

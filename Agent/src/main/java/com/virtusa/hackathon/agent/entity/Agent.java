@@ -1,9 +1,11 @@
-package com.virtusa.hackathon.faultAssignment.entity;
+package com.virtusa.hackathon.agent.entity;
 
 import java.util.List;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
+
+import com.virtusa.hackathon.agent.dto.Ticketdto;
 
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -26,18 +28,18 @@ public class Agent {
 	private Long agentId;
     private String name;
     private String type;
-    private boolean availability;
+    private Boolean availability=true;
     private String location;
     private String contactInformation;
     private String password;
     private List<String> skills;
-    private int workload;
+    private int workload=0;
     private List<String> languages;
     private String shiftInformation;
     @DecimalMin(value = "0.0", inclusive = false)
     @Digits(integer = 1, fraction = 1)
 	private float rating;
-	 @OneToMany(mappedBy = "agent", fetch = FetchType.LAZY)
-	 @ElementCollection
-	private List<Ticket> tickets;
+	 
+	
+	
 }

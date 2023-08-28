@@ -9,5 +9,5 @@ public interface TicketService {
 	public void updateTicketStatus(Ticket ticket,String status);
 	public void updateAssignment(Ticket ticket,String Category,String Priority);
 	public Ticket findTicketById(Long TicketId);
-	public List<Ticket> getClosedTicketsOfCust(long custId);
+	public List<Ticket> getTicketsOfCustByStatus(long custId,String status);
 }
